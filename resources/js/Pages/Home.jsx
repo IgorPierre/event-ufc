@@ -7,7 +7,7 @@ export default function Home() {
         <MainLayout>
             <Head title="Início" />
 
-            <EventCard />
+            <EventCard color={"teal"}/>
         </MainLayout>
     );
 }

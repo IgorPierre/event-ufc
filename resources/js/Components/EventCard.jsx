@@ -2,13 +2,13 @@ import {Link} from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import DefaultButtom from "@/Components/DefaultButtom.jsx";
 
-export default  function EventCard() {
+export default  function EventCard({ color }) {
     return (
-        <div className="bg-teal-300 text-teal-800 flex flex-col justify-start gap-2 p-6 w-80 h-full rounded-2xl overflow-hidden relative">
+        <div className={`bg-${color}-300 text-${color}-800 flex flex-col justify-start gap-2 p-6 w-80 h-full rounded-2xl overflow-hidden relative`}>
             <h1 className="text-7xl font-black opacity-15 absolute bottom-[-8px] left-[-8px]">PALESTRA ESTUDANTIL</h1>
 
             <div className="flex justify-between w-full mb-12">
-                <span className="text-teal-500 text-xl font-semibold">Palestra</span>
+                <span className={`text-${color}-500 text-xl font-semibold`}>Palestra</span>
                 <DefaultButtom>Inscreva-se</DefaultButtom>
             </div>
 
@@ -42,9 +42,6 @@ export default  function EventCard() {
 
                 <small>Data: 22/03/2025 - 12:00 -13:30</small>
             </div>
-
-
-
         </div>
     );
 }
