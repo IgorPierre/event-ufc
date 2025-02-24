@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,13 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+});
+
+Route::group(['prefix' => 'events'], function () {
+    Route::get('/', [EventController::class, 'index'])->name('events.index');
+    Route::post('/', [EventController::class, 'store'])->name('events.store');
+    Route::put('/{event}', [EventController::class, 'update'])->name('events.update');
+    Route::delete('/{event}', [EventController::class, 'destroy'])->name('events.destroy');
 });
 
 Route::get('/dashboard', function () {
