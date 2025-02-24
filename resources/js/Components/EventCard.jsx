@@ -17,6 +17,11 @@ const colorVariants = {
         bg: "bg-violet-300",
         text: "text-violet-800",
         label: "text-violet-500"
+    },
+    sky: {
+        bg: "bg-sky-300",
+        text: "text-sky-800",
+        label: "text-sky-500"
     }
 };
 
@@ -27,31 +32,32 @@ const EventDetail = ({ icon: Icon, text }) => (
     </div>
 );
 
-export default function EventCard({ color = "teal", category }) {
+export default function EventCard({ color = "teal", type, title, description, location, scheduled_at }) {
     const colors = colorVariants[color] || colorVariants.teal;
 
     return (
         <div className={`flex flex-col justify-start gap-2 p-6 w-80 h-full rounded-2xl overflow-hidden relative ${colors.bg} ${colors.text}`}>
-            <BackgroundLetter content={category} />
-
+            <BackgroundLetter content={type} />
             <div className="flex justify-between w-full mb-12">
-                <span className={`text-xl font-semibold ${colors.label}`}>
-                    {category}
+                <span className={`text-xl font-semibold underline  ${colors.label}`}>
+                    {type}
                 </span>
                 <DefaultButton>Inscreva-se</DefaultButton>
             </div>
 
             <EventDetail icon={AcademicCapIcon} text={"Igor Pierre"} />
 
-            <h2 className="text-2xl font-semibold">
-                Inteligência artificial no combate a crimes cibernéticos
+            <h2 className="text-2xl leading-6 font-bold">
+                {title}
             </h2>
+
             <p className="leading-5 mb-8">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab esse inventore maiores, molestias, nulla numquam odio officiis quae repellat repudiandae rerum suscipit veritatis.
+                {description}
             </p>
 
-            <EventDetail icon={MapPinIcon} text={"Local: Auditório, mucambinho"} />
-            <EventDetail icon={CalendarDaysIcon} text={"Data: 22/03/2025 - 12:00 - 13:30"} />
+            <EventDetail icon={MapPinIcon} text={location} />
+
+            <EventDetail icon={CalendarDaysIcon} text={scheduled_at} />
         </div>
     );
 }

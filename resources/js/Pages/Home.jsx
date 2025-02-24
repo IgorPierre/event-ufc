@@ -8,9 +8,14 @@ export default function Home() {
             <Head title="Início" />
 
             <section className="grid grid-cols-4 gap-6 h-full">
-                <EventCard color={"teal"} category={"Palestra"}/>
-                <EventCard color={"violet"} category={"Reunião Geral"}/>
-                <EventCard color={"rose"} category={"Minicurso"}/>
+                <EventCard
+                    color={"sky"}
+                    type={"Palestra"}
+                    title={"Inteligencia artificial no combate a crimes cibernéticos"}
+                    description={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquid eligendi ex in nesciunt placeat quam quia quidem sit voluptate?"}
+                    location={"auditório mucambinho"}
+                    scheduled_at={"22/12/22025 - 17:00"}
+                />
             </section>
         </MainLayout>
     );
