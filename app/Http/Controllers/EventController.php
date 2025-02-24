@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\EventTypes;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class EventController extends Controller
 {
-    public function index(): \Inertia\Response
+    public function index()
     {
-        return Inertia::render('Event', [
+        return Inertia::render('Events', [
             'events' => Event::all(),
+            'eventTypes' => EventTypes::labels(),
         ]);
     }
 
