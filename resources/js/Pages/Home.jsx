@@ -7,7 +7,11 @@ export default function Home() {
         <MainLayout>
             <Head title="Início" />
 
-            <EventCard color={"teal"}/>
+            <section className="grid grid-cols-4 gap-6">
+                <EventCard color={"teal"} category={"Palestra"}/>
+                <EventCard color={"violet"} category={"Reunião Geral"}/>
+                <EventCard color={"rose"} category={"Minicurso"}/>
+            </section>
         </MainLayout>
     );
 }

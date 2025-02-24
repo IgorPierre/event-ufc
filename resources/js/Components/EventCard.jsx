@@ -18,18 +18,18 @@ const colorVariants = {
     }
 };
 
-export default function EventCard({ color = "teal" }) {
+export default function EventCard({ color = "teal", category }) {
     const colors = colorVariants[color] || colorVariants.teal;
 
     return (
         <div className={`flex flex-col justify-start gap-2 p-6 w-80 h-full rounded-2xl overflow-hidden relative ${colors.bg} ${colors.text}`}>
-            <h1 className="text-7xl font-black opacity-15 absolute bottom-[-8px] left-[-8px]">
-                PALESTRA ESTUDANTIL
+            <h1 className="text-7xl uppercase font-black opacity-15 absolute bottom-[-8px] left-[-8px]">
+                {category}
             </h1>
 
             <div className="flex justify-between w-full mb-12">
                 <span className={`text-xl font-semibold ${colors.label}`}>
-                    Palestra
+                    {category}
                 </span>
                 <DefaultButtom>Inscreva-se</DefaultButtom>
             </div>
