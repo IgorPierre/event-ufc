@@ -1,6 +1,6 @@
-import DefaultButtom from "@/Components/DefaultButtom.jsx";
+import { AcademicCapIcon, CalendarDaysIcon, MapPinIcon } from "@heroicons/react/16/solid/index.js";
+import DefaultButton from "@/Components/DefaultButton.jsx";
 import BackgroundLetter from "@/Components/BackgroundLetter.jsx";
-import {AcademicCapIcon, CalendarDaysIcon, MapPinIcon} from "@heroicons/react/16/solid/index.js";
 
 const colorVariants = {
     teal: {
@@ -20,24 +20,28 @@ const colorVariants = {
     }
 };
 
+const EventDetail = ({ icon: Icon, text }) => (
+    <div className="flex justify-start items-center gap-2">
+        <Icon className="size-4" />
+        <small>{text}</small>
+    </div>
+);
+
 export default function EventCard({ color = "teal", category }) {
     const colors = colorVariants[color] || colorVariants.teal;
 
     return (
         <div className={`flex flex-col justify-start gap-2 p-6 w-80 h-full rounded-2xl overflow-hidden relative ${colors.bg} ${colors.text}`}>
-           <BackgroundLetter content={category}/>
+            <BackgroundLetter content={category} />
 
             <div className="flex justify-between w-full mb-12">
                 <span className={`text-xl font-semibold ${colors.label}`}>
                     {category}
                 </span>
-                <DefaultButtom>Inscreva-se</DefaultButtom>
+                <DefaultButton>Inscreva-se</DefaultButton>
             </div>
 
-            <div className="flex justify-start items-center gap-2 text-slate-100">
-                <AcademicCapIcon className="size-4"/>
-                <small className="font-semibold">Igor Pierre</small>
-            </div>
+            <EventDetail icon={AcademicCapIcon} text={"Igor Pierre"} />
 
             <h2 className="text-2xl font-semibold">
                 Inteligência artificial no combate a crimes cibernéticos
@@ -46,15 +50,8 @@ export default function EventCard({ color = "teal", category }) {
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab esse inventore maiores, molestias, nulla numquam odio officiis quae repellat repudiandae rerum suscipit veritatis.
             </p>
 
-            <div className="flex justify-start items-center gap-2">
-                <MapPinIcon className="size-4"/>
-                <small>Local: Auditório, mucambinho</small>
-            </div>
-
-            <div className="flex justify-start items-center gap-2">
-                <CalendarDaysIcon className="size-4"/>
-                <small>Data: 22/03/2025 - 12:00 -13:30</small>
-            </div>
+            <EventDetail icon={MapPinIcon} text={"Local: Auditório, mucambinho"} />
+            <EventDetail icon={CalendarDaysIcon} text={"Data: 22/03/2025 - 12:00 - 13:30"} />
         </div>
     );
 }
