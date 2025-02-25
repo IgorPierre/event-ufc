@@ -1,6 +1,6 @@
 export default function BackgroundLetter({ content }) {
     return (
-        <div className="flex flex-col text-nowrap absolute bottom-0 overflow-hidden">
+        <div className="flex flex-col text-nowrap absolute bottom-0">
             <Latter className="ml-6">{content}</Latter>
             <Latter className="ml-[-18px]">{content}</Latter>
         </div>
