@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Enums\EventTypes;
+use App\Models\Event;
 use Inertia\Inertia;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Home', ['']);
+        $events = Event::all();
+
+        return Inertia::render('Home', [
+            'events' => $events,
+            'eventTypes' => EventTypes::labels(),
+        ]);
     }
 }
