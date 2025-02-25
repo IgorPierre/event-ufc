@@ -11,7 +11,6 @@ export default function Events({ events, eventTypes }) {
                 {events.map((event) => (
                     <EventCard
                         key={event.id}
-                        color={"sky"}
                         type={eventTypes[event.type] || "Desconhecido"}
                         title={event.title}
                         description={event.description}

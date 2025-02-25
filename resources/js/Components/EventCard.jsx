@@ -6,22 +6,30 @@ const colorVariants = {
     teal: {
         bg: "bg-teal-300",
         text: "text-teal-800",
-        label: "text-teal-500"
-    },
-    rose: {
-        bg: "bg-rose-300",
-        text: "text-rose-800",
-        label: "text-rose-500"
+        label: "text-teal-600"
     },
     violet: {
         bg: "bg-violet-300",
         text: "text-violet-800",
-        label: "text-violet-500"
+        label: "text-violet-600"
     },
     sky: {
         bg: "bg-sky-300",
         text: "text-sky-800",
-        label: "text-sky-500"
+        label: "text-sky-600"
+    }
+};
+
+const getColorByType = (type) => {
+    switch (type) {
+        case "Palestra":
+            return colorVariants.teal;
+        case "Encontro estudantil":
+            return colorVariants.violet;
+        case "Minicurso":
+            return colorVariants.sky;
+        default:
+            return colorVariants.teal;
     }
 };
 
@@ -32,14 +40,14 @@ const EventDetail = ({ icon: Icon, text }) => (
     </div>
 );
 
-export default function EventCard({ color = "teal", type, title, description, location, scheduled_at }) {
-    const colors = colorVariants[color] || colorVariants.teal;
+export default function EventCard({ type, title, description, location, scheduled_at }) {
+    const colors = getColorByType(type);
 
     return (
         <div className={`flex flex-col justify-start gap-2 p-6 w-80 h-full rounded-2xl overflow-hidden relative ${colors.bg} ${colors.text}`}>
             <BackgroundLetter content={type} />
             <div className="flex justify-between w-full mb-12">
-                <span className={`text-xl font-semibold underline  ${colors.label}`}>
+                <span className={`text-xl font-semibold underline ${colors.label}`}>
                     {type}
                 </span>
                 <DefaultButton>Inscreva-se</DefaultButton>
