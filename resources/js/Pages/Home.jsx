@@ -1,6 +1,7 @@
 import MainLayout from "@/Layouts/MainLayout.jsx";
 import {Head} from "@inertiajs/react";
 import EventCard from "@/Components/EventCard.jsx";
+import Modal from "@/Components/Modal.jsx";
 
 export default function Home() {
     return (
@@ -16,6 +17,8 @@ export default function Home() {
                     location={"auditório mucambinho"}
                     scheduled_at={"22/12/22025 - 17:00"}
                 />
+
+                <Modal/>
             </section>
         </MainLayout>
     );

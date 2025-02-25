@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { router } from '@inertiajs/react';
 
-export default function CreateEvent() {
+export default function CreateEvent({ eventTypes }) {
     const [values, setValues] = useState({
         type: "",
         title: "",
@@ -33,12 +33,19 @@ export default function CreateEvent() {
         <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8">
             <div className="mb-4">
                 <label htmlFor="type" className="block text-sm font-medium text-gray-700">Tipo de Evento:</label>
-                <input
+                <select
                     id="type"
                     value={values.type}
                     onChange={handleChange}
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                />
+                >
+                    <option value="" selected disabled>Selecione o tipo de evento</option>
+                    {Object.entries(eventTypes).map(([key, label]) => (
+                        <option key={key} value={key}>
+                            {label}
+                        </option>
+                    ))}
+                </select>
                 {errors.type && <p className="text-red-500 text-sm mt-1">{errors.type}</p>}
             </div>
 
@@ -96,15 +103,6 @@ export default function CreateEvent() {
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                 />
                 {errors.scheduled_at && <p className="text-red-500 text-sm mt-1">{errors.scheduled_at}</p>}
-            </div>
-
-            <div className="flex justify-end">
-                <button
-                    type="submit"
-                    className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                >
-                    Criar Evento
-                </button>
             </div>
         </form>
     );
