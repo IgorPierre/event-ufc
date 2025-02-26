@@ -47,19 +47,18 @@ export default function Dashboard({ events, eventTypes }) {
                                 description={event.description}
                                 location={event.location}
                                 scheduled_at={event.scheduled_at}
-                                onClick={() => openModal(event)} // Abre o modal de edição
+                                onClick={() => openModal(event)}
                             />
                         ))}
                     </section>
                 </div>
             </div>
 
-            {/* Modal para criação/edição de eventos */}
             <Modal show={isModalOpen} onClose={closeModal} maxWidth="lg">
                 <div className="p-6">
                     <CreateEvent
                         eventTypes={eventTypes}
-                        event={editingEvent} // Passa null para criação ou o evento para edição
+                        event={editingEvent}
                         onSuccess={closeModal}
                     />
 
