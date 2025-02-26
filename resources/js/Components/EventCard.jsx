@@ -50,7 +50,7 @@ export default function EventCard({ type, title, description, location, schedule
                 <span className={`text-xl font-semibold underline ${colors.label}`}>
                     {type}
                 </span>
-                <DefaultButton>Inscreva-se</DefaultButton>
+                {/*<DefaultButton>Inscreva-se</DefaultButton>*/}
             </div>
 
             <EventDetail icon={AcademicCapIcon} text={"Igor Pierre"} />
