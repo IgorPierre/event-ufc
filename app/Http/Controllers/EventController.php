@@ -12,17 +12,19 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::where('user_id', Auth::user()->id);
+        // Filtra os eventos pelo ID do usuário logado
+        $events = Event::where('user_id', Auth::user()->id)->get();
 
-        return Inertia::render('Events', [
-            'events' => Event::all(),
+        return Inertia::render('Dashboard', [
+            'events' => $events,
             'eventTypes' => EventTypes::labels(),
         ]);
     }
 
     public function store(Request $request)
     {
-        Event::create($request->validate([
+        // Cria o evento e associa ao usuário logado
+        $request->user()->events()->create($request->validate([
             'type' => ['required'],
             'title' => ['required', 'max:50'],
             'leader' => ['required', 'max:50'],
@@ -31,27 +33,33 @@ class EventController extends Controller
             'scheduled_at' => ['required', 'date'],
         ]));
 
-        return redirect()->route('events.index');
+        return redirect()->route('dashboard');
     }
 
     public function update(Request $request, Event $event)
     {
-        $event->update($request->validate([
-            'type' => ['required'],
-            'title' => ['required', 'max:50'],
-            'leader' => ['required', 'max:50'],
-            'description' => ['nullable', 'max:255'],
-            'location' => ['required', 'max:255'],
-            'scheduled_at' => ['required', 'date'],
-        ]));
+        // Atualiza o evento, garantindo que ele pertença ao usuário logado
+        if ($event->user_id === $request->user()->id) {
+            $event->update($request->validate([
+                'type' => ['required'],
+                'title' => ['required', 'max:50'],
+                'leader' => ['required', 'max:50'],
+                'description' => ['nullable', 'max:255'],
+                'location' => ['required', 'max:255'],
+                'scheduled_at' => ['required', 'date'],
+            ]));
+        }
 
-        return redirect()->route('events.index');
+        return redirect()->route('dashboard');
     }
 
     public function destroy(Event $event)
     {
-        $event->delete();
+        // Deleta o evento, garantindo que ele pertença ao usuário logado
+        if ($event->user_id === $request->user()->id) {
+            $event->delete();
+        }
 
-        return redirect()->route('events.index');
+        return redirect()->route('dashboard');
     }
 }
