@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->enum('type', ['lecture', 'student_meeting', 'course'])->default('lecture');
             $table->string('title');
             $table->string('leader');

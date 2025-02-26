@@ -9,7 +9,7 @@ export default function BackgroundLetter({ content }) {
 
 function Latter({ children, className }) {
     return (
-        <h1 className={`text-6xl uppercase font-black opacity-15 inline-block ${className}`}>
+        <h1 className={`text-5xl uppercase font-black opacity-15 inline-block ${className}`}>
             {children}
         </h1>
     );

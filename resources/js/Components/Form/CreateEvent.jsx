@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { router } from '@inertiajs/react';
 
-export default function CreateEvent({ eventTypes }) {
+export default function CreateEvent({ eventTypes, event, onSuccess }) {
+    // Estado para armazenar os valores do formulário
     const [values, setValues] = useState({
         type: "",
         title: "",
@@ -11,8 +12,24 @@ export default function CreateEvent({ eventTypes }) {
         scheduled_at: "",
     });
 
+    // Estado para armazenar erros de validação
     const [errors, setErrors] = useState({});
 
+    // Preenche o formulário com os dados do evento, se existir
+    useEffect(() => {
+        if (event) {
+            setValues({
+                type: event.type,
+                title: event.title,
+                leader: event.leader,
+                description: event.description,
+                location: event.location,
+                scheduled_at: event.scheduled_at,
+            });
+        }
+    }, [event]);
+
+    // Função para atualizar os valores do formulário
     function handleChange(e) {
         const { id, value } = e.target;
         setValues((prevValues) => ({
@@ -21,12 +38,29 @@ export default function CreateEvent({ eventTypes }) {
         }));
     }
 
+    // Função para enviar o formulário
     function handleSubmit(e) {
         e.preventDefault();
-        router.post('/events', values, {
-            onError: (err) => setErrors(err),
-            onSuccess: () => setErrors({}),
-        });
+
+        if (event) {
+            // Se existir um evento, atualiza (PUT)
+            router.put(`/events/${event.id}`, values, {
+                onError: (err) => setErrors(err),
+                onSuccess: () => {
+                    setErrors({});
+                    onSuccess(); // Fecha o modal ou executa outra ação
+                },
+            });
+        } else {
+            // Se não existir um evento, cria um novo (POST)
+            router.post('/events', values, {
+                onError: (err) => setErrors(err),
+                onSuccess: () => {
+                    setErrors({});
+                    onSuccess(); // Fecha o modal ou executa outra ação
+                },
+            });
+        }
     }
 
     return (
@@ -39,7 +73,7 @@ export default function CreateEvent({ eventTypes }) {
                     onChange={handleChange}
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                 >
-                    <option value="" selected disabled>Selecione o tipo de evento</option>
+                    <option value="" disabled>Selecione o tipo de evento</option>
                     {Object.entries(eventTypes).map(([key, label]) => (
                         <option key={key} value={key}>
                             {label}
@@ -103,6 +137,15 @@ export default function CreateEvent({ eventTypes }) {
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                 />
                 {errors.scheduled_at && <p className="text-red-500 text-sm mt-1">{errors.scheduled_at}</p>}
+            </div>
+
+            <div className="flex justify-end">
+                <button
+                    type="submit"
+                    className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700"
+                >
+                    {event ? 'Atualizar Evento' : 'Criar Evento'}
+                </button>
             </div>
         </form>
     );

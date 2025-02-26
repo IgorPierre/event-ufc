@@ -1,7 +1,6 @@
 import MainLayout from "@/Layouts/MainLayout.jsx";
-import {Head} from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 import EventCard from "@/Components/EventCard.jsx";
-import Modal from "@/Components/Modal.jsx";
 
 export default function Home({ events, eventTypes }) {
     return (
@@ -19,8 +18,6 @@ export default function Home({ events, eventTypes }) {
                         scheduled_at={event.scheduled_at}
                     />
                 ))}
-
-                <Modal/>
             </section>
         </MainLayout>
     );

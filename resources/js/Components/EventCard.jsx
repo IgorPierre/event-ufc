@@ -40,13 +40,13 @@ const EventDetail = ({ icon: Icon, text }) => (
     </div>
 );
 
-export default function EventCard({ type, title, description, location, scheduled_at }) {
+export default function EventCard({ type, title, description, location, scheduled_at, onClick }) {
     const colors = getColorByType(type);
 
     return (
-        <div className={`flex flex-col justify-start gap-2 p-6 w-80 h-[500px] rounded-2xl overflow-hidden relative ${colors.bg} ${colors.text}`}>
+        <div onClick={onClick} className={`flex flex-col justify-start gap-2 p-6 w-80 h-[500px] rounded-2xl overflow-hidden relative ${colors.bg} ${colors.text}`}>
             <BackgroundLetter content={type} />
-            <div className="flex justify-between w-full mb-12">
+            <div className="flex justify-between w-full mb-8">
                 <span className={`text-xl font-semibold underline ${colors.label}`}>
                     {type}
                 </span>
@@ -59,7 +59,7 @@ export default function EventCard({ type, title, description, location, schedule
                 {title}
             </h2>
 
-            <p className="leading-5 mb-8">
+            <p className="leading-5 mb-4">
                 {description}
             </p>
 
