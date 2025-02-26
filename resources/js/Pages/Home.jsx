@@ -23,7 +23,7 @@ export default function Home({ events: initialEvents, eventTypes }) {
         <MainLayout>
             <Head title="Início" />
 
-            <div className="mb-6 space-y-4">
+            <div className="flex items-center gap-4 mb-6 w-full">
                 <div>
                     <label htmlFor="filterName" className="block text-sm font-medium text-gray-700">
                         Filtrar por nome:
