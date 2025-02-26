@@ -47,7 +47,7 @@ export default function EventCard({ type, title, description, location, schedule
         <div onClick={onClick} className={`flex flex-col justify-start gap-2 p-6 w-80 h-[500px] rounded-2xl overflow-hidden relative ${colors.bg} ${colors.text}`}>
             <BackgroundLetter content={type} />
             <div className="flex justify-between w-full mb-8">
-                <span className={`text-xl font-semibold underline ${colors.label}`}>
+                <span className={"text-xl text-white font-semibold underline"}>
                     {type}
                 </span>
                 {/*<DefaultButton>Inscreva-se</DefaultButton>*/}
