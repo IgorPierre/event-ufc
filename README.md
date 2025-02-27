@@ -1,3 +1,3 @@
 ### Event.ufc
 
-Projeto de um isstema de registro de arividades acadêmicas
+Sistema para cadastro de eventos no campus da UFC
